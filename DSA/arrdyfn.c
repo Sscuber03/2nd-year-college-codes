@@ -4,10 +4,10 @@ int main(){
     int i,n,ch,f=0;
     int k,v,p;
     int* ar;
-    printf("Enter the size of the array\n");
+    printf("Enter the size of the array: ");
     scanf("%d",&n);
     ar = (int*)malloc(100*sizeof(int));
-    printf("Enter the elements of the array");
+    printf("Enter the elements of the array: ");
     for(i=0;i<n;i++)
     {
         scanf("%d",&ar[i]);
@@ -40,11 +40,12 @@ int main(){
                 n--;
                 break;
             case 3:
-                printf("The array values are: \n");
+                printf("The array values are: ");
                 for(i=0;i<n;i++)
                 {
                     printf("%d ",ar[i]);
                 }
+                printf("\n");
                 break;
             case 4:
                 f=1;

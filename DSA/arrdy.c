@@ -3,10 +3,10 @@
 int main(){
     int i,n;
     int* ar;
-    printf("Enter the size of the array\n");
+    printf("Enter the size of the array: ");
     scanf("%d",&n);
     ar = (int*)malloc(n*sizeof(int));
-    printf("Enter the elements of the array");
+    printf("Enter the elements of the array: ");
     for(i=0;i<n;i++)
     {
         scanf("%d",&ar[i]);
@@ -16,5 +16,6 @@ int main(){
     {
         printf("%d ",ar[i]);
     }
+    printf("\n");
     return 0;
 }
