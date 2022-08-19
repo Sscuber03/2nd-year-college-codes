@@ -143,5 +143,13 @@ int main()
         	}
 		c[0][2]=k-1;
 	}
+	for(int i=0;i<k;i++)
+	{
+		for(int j=0;j<3;j++)
+		{
+			printf("%d ",c[i][j]);
+		}
+		printf("\n");
+	}
 	return 0;
 }

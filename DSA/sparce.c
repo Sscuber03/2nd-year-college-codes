@@ -45,5 +45,13 @@ int main()
 			}
 		}
 	}
+	for(i=0;i<index;i++)
+	{
+		for(j=0;j<3;j++)
+		{
+			printf("%d ",sprarr[i][j]);
+		}
+		printf("\n");
+	}
 	return 0;
 }
