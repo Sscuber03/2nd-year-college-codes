@@ -19,6 +19,7 @@ int main()
 			arr[i][j]=++v;
 		}
 	}
+	printf("The final matrix: \n");
 	for(i=0;i<r;i++)
 	{
 		for(j=0;j<c;j++)

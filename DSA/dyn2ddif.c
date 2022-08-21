@@ -23,6 +23,7 @@ int main()
 			arr[i][j]=++v;
 		}
 	}
+	printf("Final matrix: \n");
 	for(i=0;i<r;i++)
 	{
 		for(j=0;j<c[i];j++)
