@@ -45,6 +45,7 @@ int main()
 			}
 		}
 	}
+	printf("Sparce Matix representation: \n");
 	for(i=0;i<index;i++)
 	{
 		for(j=0;j<3;j++)
