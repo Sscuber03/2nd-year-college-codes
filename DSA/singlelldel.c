@@ -7,7 +7,24 @@ struct Node
     struct Node *next;
 };
 
-struct Node *head, *tail = NULL;
+struct Node *head = NULL, *tail = NULL;
+
+void addNode(int data)
+{
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    if (head == NULL)
+    {
+        head = newNode;
+        tail = newNode;
+    }
+    else
+    {
+        tail->next = newNode;
+        tail = newNode;
+    }
+}
 
 void display()
 {
@@ -30,54 +47,75 @@ void display()
 
 void delete_begin()
 {
-    struct Node* temp = head;
-    head=head->next;
-    free(temp);
+    if (head == NULL)
+    {
+        printf("The list is empty.");
+    }
+    else
+    {
+        struct Node *temp = head;
+        head = head->next;
+        free(temp);
+    }
 }
 
 void delete_end()
 {
-    struct Node* end=head;
-    struct Node* prev = NULL;
-    while(end->next)
+    if (head == NULL)
     {
-        prev=end;
-        end=end->next;
+        printf("List is empty.");
     }
-    prev->next=NULL;
-    tail=prev;
-    free(end);
+    else
+    {
+        struct Node *end = head;
+        struct Node *prev = NULL;
+        while (end->next)
+        {
+            prev = end;
+            end = end->next;
+        }
+        prev->next = NULL;
+        tail = prev;
+        free(end);
+    }
 }
 
 void delete_at(int position)
 {
-    struct Node* temp;
-    struct Node* prev;
-    temp=head;
-    prev=head;
-    for(int i=0;i<position;i++)
+    if (head == NULL)
     {
-        if(i==0 && position==1)
+        printf("List is empty.");
+    }
+    else
+    {
+        struct Node *temp;
+        struct Node *prev;
+        temp = head;
+        prev = head;
+        for (int i = 0; i < position; i++)
         {
-            head=head->next;
-            free(temp);
-        }
-        else
-        {
-            if(i==position-1 && temp)
+            if (i == 0 && position == 1)
             {
-                prev->next = temp->next;
+                head = head->next;
                 free(temp);
             }
             else
             {
-                prev=temp;
-                if(prev==NULL)
+                if (i == position - 1 && temp)
                 {
-                    printf("Position does not exist.");
-                    break;
+                    prev->next = temp->next;
+                    free(temp);
                 }
-                temp=temp->next;
+                else
+                {
+                    prev = temp;
+                    if (prev == NULL)
+                    {
+                        printf("Position does not exist.");
+                        break;
+                    }
+                    temp = temp->next;
+                }
             }
         }
     }
@@ -88,7 +126,7 @@ int main()
     int ch = 0, n, f = 0;
     while (f == 0)
     {
-        printf("Enter 1 to delete element at top, 2 to delete element at end, 3 to delete element at position, 4 to display elements, 5 to exit the code: ");
+        printf("Enter 1 to delete element at top, 2 to delete element at end, 3 to delete element at position, 4 to add element, 5 to display elements, 6 to exit the code: ");
         scanf("%d", &ch);
         switch (ch)
         {
@@ -100,13 +138,18 @@ int main()
             break;
         case 3:
             printf("Enter the position to delete: ");
-            scanf("%d",n);
+            scanf("%d", &n);
             delete_at(n);
             break;
         case 4:
-            display();
+            printf("Enter a number: ");
+            scanf("%d", &n);
+            addNode(n);
             break;
         case 5:
+            display();
+            break;
+        case 6:
             printf("Exiting code execution...");
             f = 1;
             break;

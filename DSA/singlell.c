@@ -7,7 +7,7 @@ struct Node
     struct Node *next;
 };
 
-struct Node *head, *tail = NULL;
+struct Node *head = NULL, *tail = NULL;
 
 void addNode(int data)
 {

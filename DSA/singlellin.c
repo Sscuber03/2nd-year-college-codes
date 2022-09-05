@@ -7,7 +7,7 @@ struct Node
     struct Node *next;
 };
 
-struct Node *head, *tail = NULL;
+struct Node *head = NULL, *tail = NULL;
 
 void display()
 {
@@ -34,6 +34,8 @@ void insert_front(int data)
     newNode->data = data;
     newNode->next = head;
     head = newNode;
+    if(tail == NULL)
+        tail = newNode;
 }
 
 void insert_end(int data)
@@ -74,6 +76,8 @@ void insert_after(int position, int data)
         newNode->data=data;
         newNode->next=prev->next;
         prev->next=newNode;
+        if(tail->next != NULL)
+            tail = newNode;
     }
 }
 
@@ -104,7 +108,7 @@ int main()
             insert_after(p,n);
             break;
         case 4:
-            reverse();
+            display();
             break;
         case 5:
             printf("Exiting code execution...");
