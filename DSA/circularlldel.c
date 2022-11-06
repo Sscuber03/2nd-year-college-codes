@@ -5,7 +5,6 @@ struct Node
 {
     int data;
     struct Node *next;
-    struct Node *prev;
 };
 
 struct Node *head = NULL, *tail = NULL;
@@ -13,17 +12,17 @@ struct Node *head = NULL, *tail = NULL;
 void addNode(int data)
 {
     struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
-    newNode->data = data;
-    newNode->next = NULL;
-    if(head == NULL)
+    if(tail == NULL)
     {
-        newNode->prev = NULL;
-        head = newNode;
+        newNode->data = data;
+        newNode->next = newNode;
         tail = newNode;
+        head = newNode;
     }
     else
     {
-        newNode->prev = tail;
+        newNode->data = data;
+        newNode->next = tail->next;
         tail->next = newNode;
         tail = newNode;
     }
@@ -31,49 +30,59 @@ void addNode(int data)
 
 void display()
 {
-    struct Node *current = head;
-    if(head==NULL)
-        printf("The list is empty.");
+    struct Node *current;
+    current = head;
+    if(current == NULL)
+    {
+        printf("The list is empty. \n");
+    }
     else
     {
-        printf("The nodes of the list are: \n");
-        while(current!=NULL)
+        printf("The Nodes of the list are: ");
+        do
         {
             printf("%d ", current->data);
             current = current->next;
-        }
+        }while(current != head);
         printf("\n");
+    }
+}
+
+void delete_front()
+{
+    struct Node *temp;
+    if(tail == NULL)
+        printf("List is empty. \n");
+    else
+    {
+        temp = tail->next;
+        tail->next = temp->next;
+        head = tail->next;
+        free(temp);
     }
 }
 
 void delete_end()
 {
-    struct Node *temp = tail;
-    tail = tail->prev;
-    tail->next=NULL;
-    free(temp);
-}
-
-void delete_front()
-{
+    if(tail == NULL)
+        printf("List is empty. \n");
     struct Node *temp = head;
-    head = head->next;
-    head->prev=NULL;
-    free(temp);
+    while(temp->next != tail)
+        temp = temp->next;
+    temp->next = tail->next;
+    tail = temp;
 }
 
-void delete_at(int p)
+void delete_at(int position)
 {
-    struct Node *current = head;
-    for(int i=0;i<p;i++)
+    struct Node *current = head, *temp;
+    for(int i = 1;i<position-1;i++)
     {
         current = current->next;
     }
-    struct Node *prev = current->prev;
-    struct Node *next = current->next;
-    prev->next=next;
-    next->prev=prev;
-    free(current);
+    temp = current->next;
+    current->next = current->next->next;
+    free(temp);
 }
 
 int main()

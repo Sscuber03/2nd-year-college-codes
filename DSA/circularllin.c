@@ -5,83 +5,83 @@ struct Node
 {
     int data;
     struct Node *next;
-    struct Node *prev;
 };
 
 struct Node *head = NULL, *tail = NULL;
 
 void display()
 {
-    struct Node *current = head;
-    if(head==NULL)
-        printf("The list is empty.");
+    struct Node *current;
+    current = head;
+    if(current == NULL)
+    {
+        printf("The list is empty. \n");
+    }
     else
     {
-        printf("The nodes of the list are: \n");
-        while(current!=NULL)
+        printf("The Nodes of the list are: ");
+        do
         {
             printf("%d ", current->data);
             current = current->next;
-        }
+        }while(current != head);
         printf("\n");
+    }
+}
+
+void insert_end(int data)
+{
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+    if(tail == NULL)
+    {
+        newNode->data = data;
+        newNode->next = newNode;
+        tail = newNode;
+        head = newNode;
+    }
+    else
+    {
+        newNode->data = data;
+        newNode->next = tail->next;
+        tail->next = newNode;
+        tail = newNode;
     }
 }
 
 void insert_front(int data)
 {
     struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
-    newNode->data = data;
-    newNode->next = head;
-    newNode->prev = NULL;
-    if(head != NULL)
-        head->prev = newNode;
-    head = newNode;
-}
-
-void insert_end(int data)
-{
-    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
-    newNode->data = data;
-    newNode->next = NULL;
-    if(head == NULL)
+    if(tail == NULL)
     {
-        newNode->prev=NULL;
-        head=newNode;
+        newNode->data = data;
+        newNode->next = newNode;
+        tail = newNode;
+        head = newNode;
     }
     else
     {
-        tail->next=newNode;
-        newNode->prev=tail;
+        newNode->data = data;
+        newNode->next = head;
+        head = newNode;
+        tail->next = head;
     }
-    tail=newNode;
 }
 
 void insert_after(int position, int data)
 {
     struct Node *prev = head;
+    if(prev == NULL)
+        insert_end(data);
     for(int i=0;i<position-1;i++)
     {
-        if(prev==NULL)
-        {
-            break;
-        }
         prev = prev->next;
     }
-    if(prev==NULL)
-    {
-        printf("That position does not exist.\n ");
-    }
-    else
-    {
-        struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
-        newNode->data=data;
-        newNode->next=prev->next;
-        prev->next=newNode;
-        newNode->next->prev = newNode;
-        newNode->prev = prev;
-        if(tail->next != NULL)
-            tail = newNode;
-    }
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data=data;
+    newNode->next=prev->next;
+    prev->next=newNode;
+    if(tail->next != head)
+        tail = newNode;
 }
 
 void insert_before(int position, int data)
@@ -91,12 +91,12 @@ void insert_before(int position, int data)
 
 int main()
 {
-    int ch = 0, n, p, f = 0, ff = 0;
+    int ch = 0, n, f = 0,p, ff = 0;
     while (f == 0)
     {
         if(ff == 0)
         {
-            printf("Enter 1 to add element at front, 2 to add elements at end, 3 to add elements after a position, 4 to insert element before a position, 5 to display the elements, 6 to exit the code: ");
+            printf("Enter 1 to add element at front, 2 to add element at end, 3 to add element after a position, 4 to add element before a position, 5 display the list, 6 to exit the code: ");
             ff = 1;
         }
         else
@@ -117,18 +117,18 @@ int main()
             insert_end(n);
             break;
         case 3:
-            printf("Enter the position to enter: ");
-            scanf("%d", &p);
             printf("Enter the element to enter: ");
             scanf("%d", &n);
-            insert_after(p, n);
+            printf("Enter the position after which the element is to be entered: ");
+            scanf("%d",&p);
+            insert_after(p,n);
             break;
         case 4:
-            printf("Enter the position to enter: ");
-            scanf("%d", &p);
             printf("Enter the element to enter: ");
             scanf("%d", &n);
-            insert_before(p, n);
+            printf("Enter the position before which the element is to be entered: ");
+            scanf("%d",&p);
+            insert_before(p,n);
             break;
         case 5:
             display();

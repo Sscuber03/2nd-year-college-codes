@@ -123,10 +123,18 @@ void delete_at(int position)
 
 int main()
 {
-    int ch = 0, n, f = 0;
+    int ch = 0, n, f = 0, ff = 0;
     while (f == 0)
     {
-        printf("Enter 1 to delete element at top, 2 to delete element at end, 3 to delete element at position, 4 to add element, 5 to display elements, 6 to exit the code: ");
+        if(ff == 0)
+        {
+            printf("Enter 1 to delete element at top, 2 to delete element at end, 3 to delete element at position, 4 to add element, 5 to display elements, 6 to exit the code: ");
+            ff = 1;
+        }
+        else
+        {
+            printf("Enter your choice: ");
+        }
         scanf("%d", &ch);
         switch (ch)
         {

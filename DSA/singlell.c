@@ -75,10 +75,18 @@ void reverse()
 
 int main()
 {
-    int ch = 0, n, f = 0;
+    int ch = 0, n, f = 0, ff = 0;
     while (f == 0)
     {
-        printf("Enter 1 to add element, 2 to display count of elements, 3 to display the elements, 4 to reverse the elements, 5 to exit the code: ");
+        if(ff == 0)
+        {
+            printf("Enter 1 to add element, 2 to display count of elements, 3 to display the elements, 4 to reverse the elements, 5 to exit the code: ");
+            ff = 1;
+        }
+        else
+        {
+            printf("Enter your choice: ");
+        }
         scanf("%d", &ch);
         switch (ch)
         {

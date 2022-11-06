@@ -83,10 +83,18 @@ void insert_after(int position, int data)
 
 int main()
 {
-    int ch = 0, n, f = 0,p;
+    int ch = 0, n, f = 0,p, ff = 0;
     while (f == 0)
     {
-        printf("Enter 1 to add element at front, 2 to add element at end, 3 to add element after a node, 4 display the list, 5 to exit the code: ");
+        if(ff == 0)
+        {
+            printf("Enter 1 to add element at front, 2 to add element at end, 3 to add element after a node, 4 display the list, 5 to exit the code: ");
+            ff = 1;
+        }
+        else
+        {
+            printf("Enter your choice: ");
+        }
         scanf("%d", &ch);
         switch (ch)
         {
