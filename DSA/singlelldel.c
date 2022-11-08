@@ -121,6 +121,39 @@ void delete_at(int position)
     }
 }
 
+void delete_val(int value)
+{
+    if(head == NULL)
+    {
+        printf("List is empty.");
+    }
+    else
+    {
+        struct Node *temp;
+        temp = head;
+        if(temp->data == value)
+        {
+            delete_begin();
+        }
+        else
+        {
+            while(temp != NULL)
+            {
+                if(temp->next->data == value)
+                {
+                    temp->next = temp->next->next;
+                    free(temp);
+                    break;
+                }
+                else
+                {
+                    temp = temp->next;
+                }
+            }
+        }
+    }
+}
+
 int main()
 {
     int ch = 0, n, f = 0, ff = 0;
@@ -128,7 +161,7 @@ int main()
     {
         if(ff == 0)
         {
-            printf("Enter 1 to delete element at top, 2 to delete element at end, 3 to delete element at position, 4 to add element, 5 to display elements, 6 to exit the code: ");
+            printf("Enter 1 to delete element at top, 2 to delete element at end, 3 to delete element at position, 4 to delete a value, 5 to add element, 6 to display elements, 7 to exit the code: ");
             ff = 1;
         }
         else
@@ -150,14 +183,19 @@ int main()
             delete_at(n);
             break;
         case 4:
+            printf("Enter the value to delete: ");
+            scanf("%d", &n);
+            delete_val(n);
+            break;
+        case 5:
             printf("Enter a number: ");
             scanf("%d", &n);
             addNode(n);
             break;
-        case 5:
+        case 6:
             display();
             break;
-        case 6:
+        case 7:
             printf("Exiting code execution...");
             f = 1;
             break;
